@@ -1,0 +1,138 @@
+@startuml
+
+skinparam monochrome true
+hide empty members
+hide circle
+
+package core{
+
+  package extractors{
+    abstract class Extractor {
+        ResultField target
+        String variableName
+        {abstract} process(HTTPSamplerBase sampler, List<TestElement> children,
+              SampleResult result, JMeterVariables vars)
+    }
+
+    class RegexCorrelationExtractor extends Extractor {
+        String regex
+        String group
+        int matchNumber
+    }
+  }
+
+  package replacements{
+    abstract class Replacement {
+      String variableName
+      void process(HTTPSamplerBase sampler, List<TestElement> children, SampleResult result,
+                  JMeterVariables vars)
+    }
+
+    class RegexReplacement extends Replacement {
+        String regex
+    }
+
+    class FunctionReplacement extends RegexReplacement {
+    }
+  }
+
+  interface  CorrelationContext{
+    {abstract} void reset()
+  }
+
+  abstract class CorrelationEngine {
+    {abstract} String getName()
+    void reset()
+    void process(HTTPSamplerBase sampler, List<TestElement> children, SampleResult result)
+  }
+
+  class CorrelationRule {
+    String variableName
+    Extractor extractor
+    Replacement replacement
+    void applyReplacements(HTTPSamplerBase sampler, List<TestElement> children,
+          SampleResult result, JMeterVariables vars)
+    void addExtractors(HTTPSamplerBase sampler, List<TestElement> children,
+          SampleResult result, JMeterVariables vars)
+  }
+
+}
+
+package gui{
+  class CorrelationRulesPanel{
+  }
+
+  class CorrelationRuleTestElement{
+  }
+
+  class CorrelationRulesTestElement{
+  }
+}
+
+package siebel{
+
+  class SiebelArrayFunction {
+    {static} void split(String stringToSplit, String varNamePrefix, JMeterVariables vars)
+  }
+
+
+  class SiebelContext implements CorrelationContext {
+    void update(String page)
+  }
+
+  class SiebelCorrelationEngine extends CorrelationEngine{
+  }
+
+  class SiebelCounterReplacement extends RegexReplacement {
+  }
+
+  class SiebelRowExtractor extends RegexCorrelationExtractor {
+
+  }
+
+  class SiebelRowIdReplacement extends RegexReplacement {
+
+  }
+
+  class SiebelRowParamsReplacement extends RegexReplacement {
+
+  }
+}
+
+class CorrelationProxyControl{
+}
+
+class CorrelationProxyControlGui{
+}
+
+
+enum ResultField {
+    URL
+    REQUEST_HEADER
+    RESPONSE_CODE
+    RESPONSE_MESSAGE
+    RESPONSE_HEADER
+    RESPONSE_BODY
+    RESPONSE_BODY_UNESCAPED
+    RESPONSE_BODY_AS_DOCUMENT
+}
+
+CorrelationRule --> Extractor
+CorrelationRule --> Replacement
+CorrelationEngine --> CorrelationContext
+CorrelationEngine --> "*" CorrelationRule
+CorrelationProxyControl --> CorrelationEngine
+SiebelRowExtractor ..> SiebelArrayFunction
+CorrelationRulesTestElement ..> CorrelationRuleTestElement
+CorrelationRule ..> CorrelationRuleTestElement
+CorrelationRulesPanel ..> CorrelationRuleTestElement
+CorrelationRulesPanel ..> CorrelationRulesTestElement
+CorrelationProxyControlGui --> CorrelationProxyControl
+CorrelationProxyControlGui --> CorrelationRulesPanel
+CorrelationProxyControlGui --> CorrelationEngine
+Replacement -> CorrelationContext
+Extractor -> CorrelationContext
+
+
+
+@enduml
