@@ -21,5 +21,5 @@ Run JMeter and check the new Siebel HTTP(S) Test Script Recorder is available.
 
 ### Class Diagram
 
-![](http://www.plantuml.com/plantuml/proxy?cache=no&src=http://gitlab.abstracta.us/BZ/jmeter-siebel-plugin/raw/master/docs/classDiagram.puml)
+![](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/Blazemeter/SiebelPlugin/blob/master/docs/classDiagram.puml)
 
