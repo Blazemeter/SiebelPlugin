@@ -17,7 +17,7 @@
         <h2>Useful links</h2>
             <ul>
                 <li><a href="http://jmeter.apache.org/usermanual/jmeter_proxy_step_by_step.pdf" >http://jmeter.apache.org/usermanual/jmeter_proxy_step_by_step.pdf</a></li>
-                <li><a href="http://gitlab.abstracta.us/BZ/jmeter-siebel-plugin/blob/master/README.md" >http://gitlab.abstracta.us/BZ/jmeter-siebel-plugin/blob/master/README.md</a></li>
+                <li><a href="https://github.com/Blazemeter/SiebelPlugin/blob/master/README.md" >https://github.com/Blazemeter/SiebelPlugin/blob/master/README.md</a></li>
             </ul>       
         ]]></description>
     </template>
