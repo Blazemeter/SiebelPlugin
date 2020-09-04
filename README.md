@@ -1,5 +1,7 @@
 # JMeter-Siebel-plugin
 
+This code was updated and migrated to another project called [Correlation Recorder](https://github.com/Blazemeter/CorrelationRecorder), with more functionalities and a wider range of protocols. Please refer to that repository instead.
+
 This project implements a JMeter plugin to simplify the scripting of Siebel CRM applications by providing automatic correlations of variables at recording time.
 
 After configuring the autocorrelation rules, you can start the recording like with the normal [HTTP(S) Test Script Recorder](http://jmeter.apache.org/usermanual/jmeter_proxy_step_by_step.html). The plugin will evaluate all the regular expressions against every sample result, and in case the regular expression matches, then, a Regular Expression Extractor will be added as a child element of the sampler.
